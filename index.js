@@ -8,11 +8,24 @@ app.get("/", (req, res) => {
   res.send("Сервер работает 🚀");
 });
 
-app.get("/test", (req, res) => {
-  res.json({ ok: true });
+// 🔥 новый endpoint
+app.post("/ai", async (req, res) => {
+  try {
+    const userInput = req.body.text;
+
+    // пока просто тест
+    res.json({
+      success: true,
+      message: "Запрос получен",
+      input: userInput
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: "Ошибка сервера" });
+  }
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log("Server started on port " + PORT);
+  console.log("Server started");
 });
